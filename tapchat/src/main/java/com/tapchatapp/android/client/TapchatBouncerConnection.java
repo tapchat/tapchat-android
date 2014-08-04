@@ -79,11 +79,10 @@ public class TapchatBouncerConnection implements WebSocketClient.Listener {
     }
 
     @Override public void onMessage(String message) {
-        if (!TextUtils.isEmpty(message)) {
-            mCallback.onBouncerReceiveMessage(mGson.fromJson(message, Message.class));
-        } else {
-            Log.d(TAG, "Got an empty message?");
+        if (TextUtils.isEmpty(message)) {
+            return;
         }
+        mCallback.onBouncerReceiveMessage(mGson.fromJson(message, Message.class));
     }
 
     @Override public void onMessage(byte[] data) {}

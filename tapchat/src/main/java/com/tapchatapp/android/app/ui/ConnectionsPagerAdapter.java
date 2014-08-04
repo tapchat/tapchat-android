@@ -140,7 +140,6 @@ public class ConnectionsPagerAdapter extends TapchatFragmentStatePagerAdapter {
         ArrayList<ConnectionInfo> connections = new ArrayList<>();
         for (Connection connection : service.getConnections()) {
             connections.add(ConnectionInfo.forConnection(connection));
-            Log.d(TAG, "Add connection: " + connection.getName() + " " + connection.getId());
         }
 
         Collections.sort(connections, ConnectionInfo.COMPARATOR);

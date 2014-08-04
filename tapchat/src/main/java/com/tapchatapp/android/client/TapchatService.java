@@ -130,8 +130,6 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
                 @Override public void handleMessage(BacklogCompleteMessage message) throws Exception {
                     for (Connection connection : mConnections.values()) {
                         if (!connection.exists()) {
-                            Log.d(TAG, "Removing deleted connection! " + connection.getId() + " "
-                                    + connection.getDisplayName());
                             removeConnection(connection);
                         }
                     }
@@ -189,7 +187,6 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
             .build();
 
     private int mReqId = 0;
-    private boolean mDebug;
     private int mConnectionState;
     private int mActiveConnections;
     private boolean mLoadingOobBacklog;
@@ -315,7 +312,6 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
             throw new IllegalStateException("No connection");
         }
 
-        Log.d(TAG, "Sending: " + message.toString());
         mBouncerConnection.send(message);
     }
 
@@ -360,8 +356,6 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
 
         mHandler = new Handler();
 
-        mDebug = TapchatApp.get().getPreferences().getBoolean(TapchatApp.PREF_DEBUG, false);
-
         if (!TapchatApp.get().isConfigured()) {
             throw new RuntimeException("Server was started before being configured!");
         }
@@ -391,7 +385,7 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
 
     @Override public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy!");
+
         disconnect();
 
         mBus.post(new ServiceDestroyedEvent(this));
@@ -399,18 +393,15 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
     }
 
     @Override public boolean onUnbind(Intent intent) {
-        Log.d(TAG, "onUnbind!");
         return false;
     }
 
     @Override public IBinder onBind(Intent intent) {
-        Log.d(TAG, "onBind!");
         return mBinder;
     }
 
     @Override public void onRebind(Intent intent) {
         super.onRebind(intent);
-        Log.d(TAG, "onRebind!");
     }
 
     @Produce public ServiceReadyEvent produceServiceReadyEvent() {
@@ -458,10 +449,6 @@ public class TapchatService extends Service implements TapchatBouncerConnection.
 
     private synchronized void handleMessage(Message message) throws Exception {
         mLastMessageAt = new Date();
-
-        if (mDebug) {
-            Log.d(TAG, "Got message: " + message.getOriginalJson());
-        }
 
         if (message._reqid != null) {
             ResponseMessage responseMessage = (ResponseMessage) message;

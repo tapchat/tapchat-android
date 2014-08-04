@@ -130,7 +130,6 @@ public class TapchatApp extends Application {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
         if (id != null && key != null) {
-            Log.d(TAG, "Got push info! " + id);
             editor.putString(PREF_PUSH_ID,  id);
             editor.putString(PREF_PUSH_KEY, key);
             mPusherClient.setTapchatPushInfo(id, key);

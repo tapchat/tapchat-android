@@ -174,8 +174,6 @@ public abstract class Buffer {
             return;
         }
 
-        Log.d(TAG, "Mark read: " + getId() + "  " + getName() + "  old: " + mLastEid + " new: " + eid);
-
         mLastSeenEid    = eid;
         mUnread         = false;
         mHighlightCount = 0;
@@ -230,7 +228,6 @@ public abstract class Buffer {
                     markRead(eid);
                 } else {
                     if (message.isImportant() && !mUnread) {
-                        Log.d(TAG, "Mark unread: " + getId() + " " + getName() + " old: " + mLastSeenEid + " new: " + eid);
                         mUnread = true;
                         notifyChanged();
                     }

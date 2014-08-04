@@ -87,8 +87,6 @@ public class BufferFragment extends ListFragment {
     public static final String ARG_CONNECTION_ID = "com.tapchatapp.android.arg_connection_id";
     public static final String ARG_BUFFER_ID = "com.tapchatapp.android.arg_buffer_id";
 
-    private static final String TAG = "BufferFragment";
-
     private static final Pattern URL_PATTERN = Pattern.compile("\\(?\\bhttps?://[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]");
 
     protected long mBufferId;
@@ -402,7 +400,6 @@ public class BufferFragment extends ListFragment {
 
     protected void updateUI() {
         if (getView() == null) {
-            Log.w(TAG, "View is gone??!");
             return;
         }
 

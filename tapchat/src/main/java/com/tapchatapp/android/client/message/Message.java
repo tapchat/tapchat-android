@@ -51,8 +51,6 @@ public abstract class Message {
     public String type;
     public boolean is_backlog;
 
-    private String mJson;
-
     protected Message() { }
 
     protected Message(String method) {
@@ -69,13 +67,5 @@ public abstract class Message {
 
     public boolean isHighlight() {
         return isImportant() && highlight;
-    }
-
-    public void setOriginalJson(String originalJson) {
-        mJson = originalJson;
-    }
-
-    public String getOriginalJson() {
-        return mJson;
     }
 }

@@ -199,8 +199,6 @@ public class EditNetworkActivity extends TapchatServiceActivity {
             @Override
             public void run(ResponseMessage response, Message request) {
                 try {
-                    Log.d(TAG, "Got response: " + response);
-
                     dismissDialog(DIALOG_LOADING);
 
                     if (response.success) {
@@ -211,7 +209,7 @@ public class EditNetworkActivity extends TapchatServiceActivity {
                     showDialog(DIALOG_ERROR);
 
                 } catch (Exception ex) {
-                    Log.d(TAG, "Error adding network", ex);
+                    Log.e(TAG, "Error adding network", ex);
                     showDialog(DIALOG_ERROR);
                 }
             }

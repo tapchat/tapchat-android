@@ -33,7 +33,6 @@ import com.tapchatapp.android.client.model.Connection;
 import com.tapchatapp.android.client.TapchatService;
 
 public class ConnectionStatusBar {
-    private static final String TAG = "FragmentConnectionListener";
 
     private Fragment mFragment;
     private Connection mConnection;
@@ -84,12 +83,10 @@ public class ConnectionStatusBar {
 
     private void updateUI() {
         if (mFragment == null) {
-            Log.e(TAG, "mfragment null");
             return;
         }
         if (mFragment.getView() == null) {
             // Fragment is being removed
-            Log.e(TAG, "mfragment view null");
             return;
         }
         if (mConnection == null) {

@@ -348,7 +348,6 @@ public class Connection {
     }
 
     public void handleResponse(ResponseMessage response, Message request) {
-        Log.d(TAG, "handleResponse: " + response.toString());
         String type = response.type;
         if (type != null && type.equals("open_buffer")) {
             String bufferName = ((OpenBufferMessage) response.msg).name;
@@ -400,7 +399,6 @@ public class Connection {
                 synchronized (mBuffers) {
                     for (Buffer buffer : mBuffers.values()) {
                         if (!buffer.exists()) {
-                            Log.d(TAG, "Removing deleted buffer!!! " + buffer.getId() + " " + buffer.getName());
                             removeBuffer(buffer);
                         }
                     }
@@ -414,7 +412,6 @@ public class Connection {
                 Buffer buffer = getBuffer(bid);
 
                 if (buffer != null) {
-                    Log.i("Connection", "Re-using buffer!");
                     buffer.reload(message);
                     return;
                 }

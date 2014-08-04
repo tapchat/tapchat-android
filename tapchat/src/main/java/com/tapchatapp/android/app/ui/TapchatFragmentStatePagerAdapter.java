@@ -67,7 +67,7 @@ import java.util.ArrayList;
 public abstract class TapchatFragmentStatePagerAdapter extends PagerAdapter {
 
     private static final String TAG = "FragmentStatePagerAdapter";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private final FragmentManager mFragmentManager;
     private FragmentTransaction mCurTransaction = null;
@@ -159,7 +159,7 @@ public abstract class TapchatFragmentStatePagerAdapter extends PagerAdapter {
         // FIXME: This is a disaster.
         Fragment fragmentReal = mFragments.get(position);
         if (fragmentReal != null && fragmentReal != fragment) {
-            Log.w(TAG, "MISMATCHED FRAGMENT!!!! " + position + " " + fragment.getTag() + " " + fragmentReal.getTag() + " " + mFragments.indexOf(fragmentReal));
+            if (DEBUG) Log.w(TAG, "MISMATCHED FRAGMENT!!!! " + position + " " + fragment.getTag() + " " + fragmentReal.getTag() + " " + mFragments.indexOf(fragmentReal));
             fragment = fragmentReal;
         }
         while (mFragments.size() <= position) {
@@ -241,7 +241,7 @@ public abstract class TapchatFragmentStatePagerAdapter extends PagerAdapter {
                         mFragments.set(index, f);
                         f.onResume();
                     } else {
-                        Log.w(TAG, "Bad fragment at key " + key);
+                        if (DEBUG) Log.w(TAG, "Bad fragment at key " + key);
                     }
                 }
             }

@@ -24,6 +24,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.tapchatapp.android.app.TapchatApp;
 import com.tapchatapp.android.client.message.AwayMessage;
 import com.tapchatapp.android.client.message.BacklogCompleteMessage;
 import com.tapchatapp.android.client.message.BannedMessage;
@@ -137,10 +138,18 @@ public class MessageDeserializer implements JsonDeserializer<Message> {
             .put(YouPartedChannelMessage.TYPE, YouPartedChannelMessage.class)
             .build();
 
+    private final boolean mDebug;
+
+    public MessageDeserializer() {
+        mDebug = TapchatApp.get().getPreferences().getBoolean(TapchatApp.PREF_DEBUG, false);
+    }
+
     @Override public Message deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
 
-        Log.d("MessageDeserializer", "DESERIALIZE: " + json.toString());
+        if (mDebug) {
+            Log.d("MessageDeserializer", "Got message: " + json.toString());
+        }
 
         JsonObject jsonObject = json.getAsJsonObject();
 
@@ -161,8 +170,6 @@ public class MessageDeserializer implements JsonDeserializer<Message> {
             }
         }
 
-        Message message = context.deserialize(json, klass);
-        message.setOriginalJson(json.toString());
-        return message;
+        return context.deserialize(json, klass);
     }
 }

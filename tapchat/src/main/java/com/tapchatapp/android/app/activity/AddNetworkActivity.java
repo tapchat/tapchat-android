@@ -50,8 +50,6 @@ public class AddNetworkActivity extends EditNetworkActivity {
             @Override
             public void run(final ResponseMessage response, Message request) {
                 try {
-                    Log.d(TAG, "Got response: " + response);
-
                     dismissDialog(DIALOG_LOADING);
 
                     if (response.success) {
@@ -62,7 +60,7 @@ public class AddNetworkActivity extends EditNetworkActivity {
                     showDialog(DIALOG_ERROR);
 
                 } catch (Exception ex) {
-                    Log.d(TAG, "Error adding network", ex);
+                    Log.e(TAG, "Error adding network", ex);
                     showDialog(DIALOG_ERROR);
                 }
             }
