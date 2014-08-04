@@ -184,5 +184,5 @@ Verify that the fingerprint matches your TapChat server before continuing.
     <string name="debugging">Debug Logging</string>
     <string name="debugging_summary">Requires restart.</string>
     <string name="username_hint">Username</string>
-    <string name="donate">Donate</string>
+    <string name="contribute">Contribute</string>
 </resources>

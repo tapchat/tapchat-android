@@ -51,7 +51,7 @@ import javax.inject.Inject;
 
 public class MainActivity extends TapchatServiceFragmentActivity {
 
-    private static final Uri DONATE_URI = Uri.parse("https://tapchatapp.com/donate");
+    private static final Uri CONTRIBUTE_URI = Uri.parse("https://tapchatapp.com/contribute");
 
     public static final String EXTRA_SELECTED_CONNECTION = "com.tapchatapp.android.extra_seleted_connection";
 
@@ -162,8 +162,8 @@ public class MainActivity extends TapchatServiceFragmentActivity {
                  startActivity(new Intent(this, PreferencesActivity.class));
                  return true;
 
-             case R.id.donate:
-                 Intent intent = new Intent(Intent.ACTION_VIEW, DONATE_URI);
+             case R.id.contribute:
+                 Intent intent = new Intent(Intent.ACTION_VIEW, CONTRIBUTE_URI);
                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                  startActivity(intent);
                  return true;

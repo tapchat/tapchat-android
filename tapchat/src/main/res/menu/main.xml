@@ -32,7 +32,7 @@
         android:title="@string/preferences"
         android:showAsAction="never" />
     <item
-        android:id="@+id/donate"
-        android:title="@string/donate"
+        android:id="@+id/contribute"
+        android:title="@string/contribute"
         android:showAsAction="never"/>
 </menu>
