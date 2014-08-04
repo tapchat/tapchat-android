@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Eric Butler
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">TapChat</string>
+    <string name="welcome">Welcome to TapChat!</string>
+
+    <string name="tapchat_connecting">Connecting to TapChat server…</string>
+    <string name="tapchat_connected">Connected to TapChat server.</string>
+    <string name="tapchat_syncing">Syncing with TapChat server…</string>
+    <string name="tapchat_disconnected">Disconnected from TapChat server.</string>
+
+    <string name="disconnected_format">Disconnected from %s.</string>
+    <string name="connecting_format">Connecting to %s…</string>
+    <string name="connected_format">Connected to %s.</string>
+    <string name="retrying_format">Retrying connection to %s…</string>
+
+    <string name="loading">Loading…</string>
+
+    <string name="send">Send</string>
+    <string name="add_network">Add IRC Network</string>
+    <string name="edit_network">Edit IRC Network</string>
+    <string name="view_console">View Console</string>
+    <string name="preferences">Preferences</string>
+    <string name="show_archived">Show archived windows</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_desc">Notify when someone mentions or messages you.</string>
+    <string name="irccloud_no_notifications">Push notifications are not supported when using TapChat with IRCCloud.</string>
+    <string name="type_message">Type Message</string>
+
+    <string name="join_channel">Join Channel</string>
+    <string name="not_in_channel">Not in channel</string>
+    <string name="show_members">Show Members</string>
+    <string name="star">Star</string>
+    <string name="leave_channel">Leave channel</string>
+    <string name="login">Login</string>
+    <string name="email">Email:</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="server">Server:</string>
+    <plurals name="channel_members_format">
+        <item quantity="one">%1$s member in %2$s</item>
+        <item quantity="other">%1$s members in %2$s</item>
+    </plurals>
+    <string name="error">Error</string>
+    <string name="reconnect">Reconnect</string>
+    <string name="rejoin">Rejoin</string>
+    <string name="not_implemented">Not Implemented</string>
+    <string name="copy_text">Copy text</string>
+    <string name="message_user_format">Message %s</string>
+    <string name="mention_user_format">Mention %s</string>
+    <string name="text_copied">Copied to clipboard</string>
+    <string name="members_title_format">%s members</string>
+
+    <string name="event_socket_closed">Disconnected</string>
+    <string name="event_connecting">Connecting</string>
+    <string name="event_quit_server">Quit server</string>
+    <string name="event_you_nickchange">You are now known as %s</string>
+    <string name="event_banned">You were banned</string>
+    <string name="event_connecting_retry">Retrying connection in %s seconds</string>
+    <string name="event_waiting_to_retry">Reconnecting in %s seconds</string>
+    <string name="event_connecting_failed">Failed to connect</string>
+    <string name="event_connected">Connected to %s</string>
+    <string name="event_joining">Joining %s…</string>
+    <string name="event_user_mode">Your mode is +%s</string>
+    <string name="event_joined_channel">%s has joined</string>
+    <string name="event_parted_channel">%s has left</string>
+    <string name="event_quit">%s has quit</string>
+    <string name="event_away">"%s is away</string>
+    <string name="event_kicked_channel">%1$s was kicked from %2$s by %3$s (%4$s): %5$s</string>
+    <string name="event_you_joined_channel">You have joined</string>
+    <string name="event_you_parted_channel">You have left</string>
+    <string name="event_channel_mode_is">Mode is: %s</string>
+    <string name="event_channel_timestamp">Created at: %s</string>
+    <string name="event_nickchange">%1$s is now known as %2$s</string>
+    <string name="event_user_channel_mode">*** Mode %1$s %2$s by %3$s</string>
+    <string name="event_channel_url">Channel URL: %s</string>
+    <string name="event_channel_topic">%1$s set the topic: %2$s</string>
+    <string name="event_channel_topic_cleared">%s cleared the topic</string>
+    <string name="event_channel_mode">Channel mode: %1$s by %2$s.</string>
+    <string name="channel">Channel:</string>
+    <string name="join">Join</string>
+    <string name="join_channel_hint">#channel</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="server_hint">example.com:8067</string>
+    <string name="connection">Connection</string>
+    <string name="network_name">Network Name</string>
+    <string name="logout">Logout</string>
+    <string name="logout_text">Are you sure you want to log out?</string>
+    <string name="hostname">Hostname</string>
+    <string name="port">Port</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="unauthorized">Invalid username or password, please log in again.</string>
+    <string name="archive">Archive</string>
+    <string name="unarchive">Unarchive</string>
+    <string name="delete">Delete</string>
+    <string name="cert_dialog_title">Verify SSL Certificate</string>
+
+    <string name="cert_dialog_message"><![CDATA[The server returned the following SSL certificate fingerprint:
+
+<p><font face="monospace">%s</font></p>
+
+Verify that the fingerprint matches your TapChat server before continuing.
+]]></string>
+
+    <string name="connection_cert_dialog_message"><![CDATA[The IRC server <b>%1$s</b> has an SSL certificate that could not be automatically verified (%2$s).
+
+    <p><b>Fingerprint:</b><br><font face="monospace">%3$s</font></p>
+
+    Verify this fingerprint before continuing.
+    ]]></string>
+
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+
+    <string name="_continue">Continue</string>
+
+    <string name="mtm_accept_cert">Accept Unknown Certificate?</string>
+    <string name="mtm_decision_always">Always</string>
+    <string name="mtm_decision_once">Once</string>
+    <string name="mtm_decision_abort">Abort</string>
+    <string name="mtm_notification">Certificate Verification</string>
+    <string name="nickname_hint">nickname</string>
+    <string name="send_message">Send Message</string>
+    <string name="no_channels">You\'re not in any channels on this server.</string>
+    <string name="identity">Identity</string>
+    <string name="nickname">Nickname</string>
+    <string name="port_hint">port</string>
+    <string name="secure_connection">Secure Connection (SSL)</string>
+    <string name="hostname_hint">hostname</string>
+    <string name="real_name">Real Name</string>
+    <string name="server_password_hint">Server Password (optional)</string>
+    <string name="nickserv_password_hint">Nickserv Password (Optional)</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="error_invalid_email">Bad email address</string>
+    <string name="error_blank">Can\'t be blank</string>
+    <string name="error_invalid_port">Bad port number</string>
+    <string name="irc_networks">IRC Networks</string>
+    <string name="manage_irc_networks">Manage IRC Networks</string>
+    <string name="save">Save</string>
+    <string name="remove_network">Remove network</string>
+    <string name="confirm_delete_network">Delete this network?</string>
+    <string name="confirm_delete_buffer">Delete all history for this window?</string>
+    <string name="options">Options</string>
+    <string name="information">Information</string>
+    <string name="show_password">Show password</string>
+    <string name="welcome_ready">TapChat is ready!</string>
+    <string name="welcome_add_network">Add an IRC network to get started.</string>
+    <string name="tapchat_server_instructions"><![CDATA[Visit <b>tapchatapp.com</b> in a desktop web browser for instructions on running your own TapChat server.]]></string>
+    <string name="tapchat_need">Need a TapChat server?</string>
+    <string name="connect_your_tapchat">Connect to your tapchat server</string>
+    <string name="topic">Topic</string>
+    <string name="mode">Mode</string>
+    <string name="info_format">%s info</string>
+    <string name="channel_info">Channel Info</string>
+    <string name="theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <string name="joined_format">Joined: %s</string>
+    <string name="parted_format">Parted: %s</string>
+    <string name="quit_format">Quit: %s</string>
+    <string name="event_was_format">%1$s (was %2$s)</string>
+
+    <string name="server_outdated">Your TapChat server is out of date. Some features may not work correctly until you upgrade.</string>
+
+    <string name="commands_not_supported">Commands are not yet supported.</string>
+    <string name="debugging">Debug Logging</string>
+    <string name="debugging_summary">Requires restart.</string>
+    <string name="username_hint">Username</string>
+    <string name="donate">Donate</string>
+</resources>

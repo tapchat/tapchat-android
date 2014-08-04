@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Eric Butler
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tapchatapp.android"
+    android:versionCode="49"
+    android:versionName="3.0.0"
+    android:installLocation="auto">
+
+    <permission android:name="com.tapchatapp.android.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.tapchatapp.android.permission.C2D_MESSAGE" />
+
+    <permission
+        android:name="com.tapchatapp.android.permission.NOTIFY"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <application
+        android:name=".app.TapchatApp"
+        android:label="@string/app_name"
+        android:icon="@drawable/app_icon"
+        android:theme="@style/TapchatApplication"
+        android:allowBackup="true">
+        <activity
+            android:name=".app.activity.WelcomeActivity"
+            android:theme="@style/TapchatNoActionBarTheme"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:label="@string/login"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity
+            android:name=".app.activity.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.activity.BuffersActivity"
+            android:windowSoftInputMode="stateUnchanged"
+            android:imeOptions="flagNoExtractUi"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".app.activity.MemberListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".app.activity.PreferencesActivity"
+            android:label="@string/preferences"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".app.activity.AboutActivity" />
+
+        <activity
+            android:name=".app.activity.NetworksActivity"
+            android:label="@string/irc_networks"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity
+            android:name=".app.activity.AddNetworkActivity"
+            android:label="@string/add_network"
+            android:theme="@style/TapchatDialog"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity
+            android:name=".app.activity.EditNetworkActivity"
+            android:label="@string/edit_network"
+            android:theme="@style/TapchatDialog"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+
+        <activity
+            android:name=".network.ssl.MemorizingActivity"
+            android:theme="@style/TapchatTranslucentTheme" />
+
+        <activity
+            android:name=".app.activity.InvalidConnectionCertActivity"
+            android:theme="@style/TapchatTranslucentTheme" />
+
+        <service android:name=".client.TapchatService" />
+
+        <receiver android:name=".service.GCMReceiver" android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+               <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+               <category android:name="com.tapchatapp.android" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.MessagePushReceiver"
+            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            <intent-filter>
+                <action android:name="com.tapchatapp.android.ACTION_MESSAGE_NOTIFY" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.OpenBufferReceiver"
+            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            <intent-filter>
+                <action android:name="com.tapchatapp.android.ACTION_OPEN_BUFFER" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.NotificationClickedReceiver"
+            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            <intent-filter>
+                <action android:name="com.tapchatapp.android.ACTION_NOTIFICATION_CLICKED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.ConnectionCertReceiver"
+            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            <intent-filter>
+                <action android:name="com.tapchatapp.android.ACTION_INVALID_CERT" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+             android:name="com.crashlytics.ApiKey"
+             android:value="611d8f6f86223c02d0d15091c467295c7edd52fb" />
+    </application>
+</manifest> 

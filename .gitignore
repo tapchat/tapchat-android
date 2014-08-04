@@ -1,0 +1,14 @@
+out/
+gen/
+build/
+
+*.iws
+*.iml
+.idea
+.DS_Store
+local.properties
+.gradle
+
+com_crashlytics_export_strings.xml
+
+release.keystore

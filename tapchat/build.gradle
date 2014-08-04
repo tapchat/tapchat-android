@@ -1,0 +1,107 @@
+/*
+ * Copyright (C) 2014 Eric Butler
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'crashlytics'
+
+repositories {
+    maven { url 'libs' }
+    maven { url 'http://download.crashlytics.com/maven' }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.google.android.gms:play-services:5.0.77'
+    compile 'com.google.guava:guava:17.0'
+    compile 'com.squareup.dagger:dagger:1.2.2'
+    compile 'com.squareup:otto:1.3.5'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.squareup.retrofit:retrofit:1.6.1'
+    compile 'com.viewpagerindicator:library:2.4.2-SNAPSHOT'
+    compile 'com.crashlytics.android:crashlytics:1.0.+'
+    compile 'com.jakewharton:butterknife:5.1.2'
+    compile files('libs/android-websockets.jar')
+    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 19
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+        }
+        release {
+            storeFile file('../release.keystore')
+            keyAlias 'ericbutler'
+            storePassword ''
+            keyPassword ''
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+tasks.withType(Compile) {
+    options.encoding = "UTF-8"
+}
+
+def getPassword(name) {
+    def password = System.getenv()["${name.toUpperCase()}_PASSWORD"]
+    if (password) {
+        return password
+    }
+    switch (System.getProperty("os.name")) {
+        case "Mac OS X":
+            def process = "security -q find-generic-password -g -l tapchat-release-${name} -w".execute()
+            if (process.waitFor() == 0) {
+                password = process.text.trim()
+            }
+    }
+    if (password) {
+        return password
+    }
+    throw new Exception("Couldn't find password: ${name}")
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(':tapchat:validateReleaseSigning')) {
+        android.signingConfigs.release.storePassword = getPassword('store')
+        android.signingConfigs.release.keyPassword = getPassword('key')
+    }
+}
