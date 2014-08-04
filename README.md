@@ -5,13 +5,19 @@ Stay connected with your favorite channels without draining your phone's battery
 
 [Website](http://tapchatapp.com/) | [Install from Play Store](https://play.google.com/store/apps/details?id=com.tapchatapp.android)
 
-A TapChat server is required. See [here](https://github.com/tapchat/tapchat) for more information. 
-
+A TapChat server is required. See [here](https://github.com/tapchat/tapchat) for more information.
 
 Authors
 -------
 
  * [Eric Butler](https://twitter.com/codebutler)
+
+Contributing
+------------
+
+This repository is set up with [BitHub](https://whispersystems.org/blog/bithub/), so you can make money for committing to TapChat. The current BitHub price for an accepted pull request is:
+
+[![Current BitHub Price](https://tapchat-bithub.herokuapp.com/v1/status/payment/commit/)](https://tapchat-bithub.herokuapp.com/)
 
 
 License
