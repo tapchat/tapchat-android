@@ -18,7 +18,6 @@ package com.tapchatapp.android.client;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.SSLCertificateSocketFactory;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
@@ -38,8 +37,6 @@ import com.tapchatapp.android.app.activity.MainActivity;
 import com.tapchatapp.android.app.activity.MemberListActivity;
 import com.tapchatapp.android.app.activity.NetworksActivity;
 import com.tapchatapp.android.app.activity.PreferencesActivity;
-import com.tapchatapp.android.app.activity.TapchatActivity;
-import com.tapchatapp.android.app.activity.TapchatServiceActivity;
 import com.tapchatapp.android.app.activity.TapchatServiceFragmentActivity;
 import com.tapchatapp.android.app.activity.WelcomeActivity;
 import com.tapchatapp.android.app.fragment.BufferFragment;
@@ -54,13 +51,17 @@ import com.tapchatapp.android.app.ui.ConnectionsPagerAdapter;
 import com.tapchatapp.android.app.ui.TapchatServiceStatusBar;
 import com.tapchatapp.android.client.message.Message;
 import com.tapchatapp.android.network.PusherClient;
+import com.tapchatapp.android.network.ssl.MemorizingHostnameVerifier;
 import com.tapchatapp.android.network.ssl.MemorizingTrustManager;
+import com.tapchatapp.android.network.ssl.VerifyHostnameActivity;
 import com.tapchatapp.android.util.AndroidBus;
 
 import java.io.IOException;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
@@ -92,13 +93,12 @@ import retrofit.converter.GsonConverter;
         PreferencesActivity.class,
         PusherClient.class,
         QueryBufferFragment.class,
-        TapchatActivity.class,
         TapchatApp.class,
         TapchatBouncerConnection.class,
         TapchatService.class,
-        TapchatServiceActivity.class,
         TapchatServiceFragmentActivity.class,
         TapchatServiceStatusBar.class,
+        VerifyHostnameActivity.class,
         WelcomeActivity.class
     }
 )
@@ -130,10 +130,13 @@ public class TapchatModule {
             .create();
     }
 
-    @Provides @Singleton public OkHttpClient provideOkHttp(SSLSocketFactory sslSocketFactory) {
+    @Provides @Singleton public OkHttpClient provideOkHttp(SSLSocketFactory sslSocketFactory,
+            HostnameVerifier hostnameVerifier) {
+
         try {
             OkHttpClient okHttpClient = new OkHttpClient();
             okHttpClient.setCache(new Cache(mAppContext.getCacheDir(), MAX_CACHE_SIZE));
+            okHttpClient.setHostnameVerifier(hostnameVerifier);
             okHttpClient.setSslSocketFactory(sslSocketFactory);
             return okHttpClient;
         } catch (IOException ex) {
@@ -164,12 +167,16 @@ public class TapchatModule {
 
     @Provides @Singleton public SSLSocketFactory provideSslSocketFactory(TrustManager[] trustManagers) {
         try {
-            SSLCertificateSocketFactory factory = (SSLCertificateSocketFactory) SSLCertificateSocketFactory.getDefault(100);
-            factory.setTrustManagers(trustManagers);
-            return factory;
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, trustManagers, null);
+            return sslContext.getSocketFactory();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Provides @Singleton public HostnameVerifier provideHostnameVerifier(Bus bus) {
+        return new MemorizingHostnameVerifier(mAppContext, bus);
     }
 
     @Provides @Singleton public TrustManager[] provideTrustManagers() {

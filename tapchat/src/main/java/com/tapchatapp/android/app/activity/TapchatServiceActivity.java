@@ -47,11 +47,13 @@ public abstract class TapchatServiceActivity extends TapchatActivity implements 
 
     @Override public void onStart() {
         super.onStart();
-        mServiceConnection = (DummyServiceConnection) getLastNonConfigurationInstance();
-        if (mServiceConnection == null) {
-            mServiceConnection = new DummyServiceConnection();
-            mServiceConnection.setListener(this);
-            TapchatApp.get().bindService(new Intent(this, TapchatService.class), mServiceConnection, BIND_AUTO_CREATE);
+        if (TapchatApp.get().isConfigured()) {
+            mServiceConnection = (DummyServiceConnection) getLastNonConfigurationInstance();
+            if (mServiceConnection == null) {
+                mServiceConnection = new DummyServiceConnection();
+                mServiceConnection.setListener(this);
+                TapchatApp.get().bindService(new Intent(this, TapchatService.class), mServiceConnection, BIND_AUTO_CREATE);
+            }
         }
 
         mStatusBar.registerBus();
@@ -80,8 +82,7 @@ public abstract class TapchatServiceActivity extends TapchatActivity implements 
         return mServiceConnection;
     }
 
-    @Override public void onServiceConnected(TapchatService service) {
-    }
+    @Override public void onServiceConnected(TapchatService service) { }
 
     @Override public void onServiceDisconnected(TapchatService service) {
         Toast.makeText(TapchatServiceActivity.this, "Service died", Toast.LENGTH_SHORT).show();

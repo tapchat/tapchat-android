@@ -29,25 +29,18 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 
 import com.tapchatapp.android.R;
 import com.tapchatapp.android.app.activity.TapchatActivity;
-import com.tapchatapp.android.app.TapchatApp;
-import com.tapchatapp.android.client.TapchatService;
-import com.tapchatapp.android.service.DummyServiceConnection;
 
 public class MemorizingActivity extends TapchatActivity implements OnClickListener,OnCancelListener {
-    private static final String TAG = "MemorizingActivity";
 
     private int mDecisionId;
+
     private String mApp;
     private String mFingerprint;
-
-    private ServiceConnection mServiceConnection;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,25 +62,6 @@ public class MemorizingActivity extends TapchatActivity implements OnClickListen
             .setNegativeButton(android.R.string.cancel, this)
             .show();
 	}
-
-    @Override protected void onStart() {
-        super.onStart();
-        if (TapchatApp.get().isConfigured()) {
-            mServiceConnection = new DummyServiceConnection();
-            bindService(new Intent(this, TapchatService.class), mServiceConnection, BIND_AUTO_CREATE);
-        }
-    }
-
-    @Override protected void onStop() {
-        super.onStop();
-        try {
-            if (mServiceConnection != null) {
-                unbindService(mServiceConnection);
-            }
-        } catch (java.lang.IllegalArgumentException ex) {
-            Log.e(TAG, "Ignoring error while unbinding service." , ex);
-        }
-    }
 
 	@Override public void onClick(DialogInterface dialog, int btnId) {
         dialog.dismiss();

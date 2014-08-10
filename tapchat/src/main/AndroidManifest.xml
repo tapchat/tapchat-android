@@ -95,6 +95,10 @@
             android:theme="@style/TapchatTranslucentTheme" />
 
         <activity
+            android:name=".network.ssl.VerifyHostnameActivity"
+            android:theme="@style/TapchatTranslucentTheme" />
+
+        <activity
             android:name=".app.activity.InvalidConnectionCertActivity"
             android:theme="@style/TapchatTranslucentTheme" />
 

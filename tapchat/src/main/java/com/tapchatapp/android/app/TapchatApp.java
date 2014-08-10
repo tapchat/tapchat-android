@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.codebutler.android_websockets.WebSocketClient;
 import com.crashlytics.android.Crashlytics;

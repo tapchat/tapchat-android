@@ -36,18 +36,19 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
+
 import com.google.common.collect.Maps;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.security.KeyStore;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Map;
 
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.security.KeyStore;
-import java.security.MessageDigest;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Map;
 
 public class MemorizingTrustManager implements X509TrustManager {
     public static final String DECISION_INTENT             = "de.duenndns.ssl.DECISION";
@@ -63,8 +64,8 @@ public class MemorizingTrustManager implements X509TrustManager {
     private static final Map<Integer, MTMDecision> sDecisions = Maps.newHashMap();
     private static int sLastDecisionId = 0;
 
-    private Context          mContext;
-    private Handler          mHandler;
+    private Context mContext;
+    private Handler mHandler;
     private X509TrustManager mDefaultTrustManager;
     private X509TrustManager mAppTrustManager;
 
@@ -150,15 +151,15 @@ public class MemorizingTrustManager implements X509TrustManager {
 		}
 	}
 
-    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+    @Override public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
    		checkCertTrusted(chain, authType, false);
    	}
 
-   	public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+    @Override public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
    		checkCertTrusted(chain, authType, true);
    	}
 
-    public X509Certificate[] getAcceptedIssuers() {
+    @Override public X509Certificate[] getAcceptedIssuers() {
         return mDefaultTrustManager.getAcceptedIssuers();
    	}
 
@@ -192,7 +193,7 @@ public class MemorizingTrustManager implements X509TrustManager {
 
         IntentFilter filter = new IntentFilter(DECISION_INTENT + "/" + mContext.getPackageName());
         BroadcastReceiver receiver = new BroadcastReceiver() {
-            public void onReceive(Context ctx, Intent intent) {
+            @Override public void onReceive(Context ctx, Intent intent) {
                 int decisionId = intent.getIntExtra(DECISION_INTENT_ID, MTMDecision.DECISION_INVALID);
                 int choice = intent.getIntExtra(DECISION_INTENT_CHOICE, MTMDecision.DECISION_INVALID);
 
@@ -213,13 +214,13 @@ public class MemorizingTrustManager implements X509TrustManager {
         mContext.registerReceiver(receiver, filter);
 
    		mHandler.post(new Runnable() {
-   			public void run() {
+            @Override public void run() {
                 Intent intent = new Intent(mContext, MemorizingActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
    				intent.setData(Uri.parse(MemorizingTrustManager.class.getName() + "/" + decision.id));
                 intent.putExtra(DECISION_INTENT_APP, mContext.getPackageName());
                 intent.putExtra(DECISION_INTENT_ID, decision.id);
-                intent.putExtra(DECISION_INTENT_FINGERPRINT, certHash(chain[0], "SHA-1"));
+                intent.putExtra(DECISION_INTENT_FINGERPRINT, CertUtil.certHash(chain[0], CertUtil.SHA1));
                 mContext.startActivity(intent);
    			}
    		});
@@ -244,26 +245,6 @@ public class MemorizingTrustManager implements X509TrustManager {
    			    throw new CertificateException();
    		}
    	}
-
-	private static String hexString(byte[] data) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < data.length; i++) {
-			builder.append(String.format("%02x", data[i]));
-			if (i < data.length - 1)
-				builder.append(":");
-		}
-		return builder.toString();
-	}
-
-	private static String certHash(final X509Certificate cert, String digest) {
-		try {
-			MessageDigest md = MessageDigest.getInstance(digest);
-			md.update(cert.getEncoded());
-			return hexString(md.digest());
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
 
     private static MTMDecision createDecision() {
         synchronized (sDecisions) {

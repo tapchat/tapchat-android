@@ -125,6 +125,12 @@ Verify that the fingerprint matches your TapChat server before continuing.
     Verify this fingerprint before continuing.
     ]]></string>
 
+    <string name="verify_hostname_message"><![CDATA[The authenticity of host <b>%1$s</b> can\'t be established.
+
+    <p><b>Fingerprint:</b><br><font face="monospace">%2$s</font></p>
+
+    Are you sure you want to continue connecting?]]></string>
+
     <string name="accept">Accept</string>
     <string name="reject">Reject</string>
 
