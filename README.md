@@ -1,9 +1,11 @@
 TapChat: Modern IRC for Android
 ==============================
 
-Stay connected with your favorite channels without draining your phone's battery. Scroll back to catch up on what you've missed, and receive push notifications1 when someone mentions or messages you.
+Stay connected with your favorite channels without draining your phone's battery. Scroll back to catch up on what you've missed, and receive push notifications when someone mentions or messages you.
 
-[Website](http://tapchatapp.com/) | [Install from Play Store](https://play.google.com/store/apps/details?id=com.tapchatapp.android)
+ * [Website](http://tapchatapp.com/)
+ * [Install from Play Store](https://play.google.com/store/apps/details?id=com.tapchatapp.android)
+ * [G+ Community (For Play Store Beta)](https://plus.google.com/communities/114324036729579908612)
 
 A TapChat server is required. See [here](https://github.com/tapchat/tapchat) for more information.
 
