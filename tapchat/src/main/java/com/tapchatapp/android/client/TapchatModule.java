@@ -54,6 +54,7 @@ import com.tapchatapp.android.network.PusherClient;
 import com.tapchatapp.android.network.ssl.MemorizingHostnameVerifier;
 import com.tapchatapp.android.network.ssl.MemorizingTrustManager;
 import com.tapchatapp.android.network.ssl.VerifyHostnameActivity;
+import com.tapchatapp.android.service.GCMReceiver;
 import com.tapchatapp.android.util.AndroidBus;
 
 import java.io.IOException;
@@ -82,6 +83,7 @@ import retrofit.converter.GsonConverter;
         ConnectionFragment.class,
         ConnectionsPagerAdapter.class,
         EditNetworkActivity.class,
+        GCMReceiver.class,
         InvalidConnectionCertActivity.class,
         LoginActivity.class,
         MainActivity.class,
