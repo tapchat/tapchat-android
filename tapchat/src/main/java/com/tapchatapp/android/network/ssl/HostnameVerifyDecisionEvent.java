@@ -22,7 +22,6 @@ public class HostnameVerifyDecisionEvent {
     private final boolean mAllow;
 
     public HostnameVerifyDecisionEvent(int decisionId, boolean allow) {
-
         mDecisionId = decisionId;
         mAllow = allow;
     }

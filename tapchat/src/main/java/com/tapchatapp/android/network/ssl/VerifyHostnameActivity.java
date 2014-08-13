@@ -52,7 +52,6 @@ public class VerifyHostnameActivity extends TapchatServiceActivity {
     }
 
     public static class VerifyHostnameDialogFragment extends DialogFragment implements Dialog.OnClickListener {
-
         @Override public Dialog onCreateDialog(Bundle savedInstanceState) {
             String hostname = getArguments().getString(MemorizingHostnameVerifier.EXTRA_HOSTNAME);
             String fingerprint = getArguments().getString(MemorizingHostnameVerifier.EXTRA_FINGERPRINT);
