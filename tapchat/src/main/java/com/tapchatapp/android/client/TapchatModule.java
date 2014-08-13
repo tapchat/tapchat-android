@@ -51,6 +51,7 @@ import com.tapchatapp.android.app.ui.ConnectionsPagerAdapter;
 import com.tapchatapp.android.app.ui.TapchatServiceStatusBar;
 import com.tapchatapp.android.client.message.Message;
 import com.tapchatapp.android.network.PusherClient;
+import com.tapchatapp.android.network.ssl.MemorizingActivity;
 import com.tapchatapp.android.network.ssl.MemorizingHostnameVerifier;
 import com.tapchatapp.android.network.ssl.MemorizingTrustManager;
 import com.tapchatapp.android.network.ssl.VerifyHostnameActivity;
@@ -90,6 +91,8 @@ import retrofit.converter.GsonConverter;
         MainFragment.class,
         MemberListActivity.class,
         MemberListFragment.class,
+        MemorizingActivity.class,
+        MemorizingHostnameVerifier.class,
         NetworksActivity.class,
         NetworksFragment.class,
         PreferencesActivity.class,
