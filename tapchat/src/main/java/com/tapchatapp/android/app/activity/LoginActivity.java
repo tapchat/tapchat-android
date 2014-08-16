@@ -93,10 +93,8 @@ public class LoginActivity extends TapchatActivity implements CompoundButton.OnC
             final Uri baseUri = getBaseUri();
             mSession.setUri(baseUri);
 
-            // FIXME: Not safe!
             mAPI.login(new TapchatAPI.LoginBody(email, password), new Callback<TapchatAPI.LoginResult>() {
-                @Override
-                public void success(TapchatAPI.LoginResult loginResult, Response response) {
+                @Override public void success(TapchatAPI.LoginResult loginResult, Response response) {
                     String sessionId = loginResult.session;
 
                     SharedPreferences.Editor editor = TapchatApp.get().getPreferences().edit();
@@ -110,9 +108,10 @@ public class LoginActivity extends TapchatActivity implements CompoundButton.OnC
                     setResult(RESULT_OK);
                     finish();
                 }
-
-                @Override
-                public void failure(RetrofitError ex) {
+                @Override public void failure(RetrofitError ex) {
+                    if (isFinishing()) {
+                        return;
+                    }
                     new AlertDialog.Builder(LoginActivity.this)
                         .setTitle(R.string.error)
                         .setMessage(R.string.unauthorized)
