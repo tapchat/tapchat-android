@@ -51,7 +51,7 @@ import javax.inject.Inject;
 
 public class MainActivity extends TapchatServiceFragmentActivity {
 
-    private static final Uri CONTRIBUTE_URI = Uri.parse("https://tapchatapp.com/contribute");
+    private static final Uri CONTRIBUTE_URI = Uri.parse("http://tapchatapp.com/contribute");
 
     public static final String EXTRA_SELECTED_CONNECTION = "com.tapchatapp.android.extra_seleted_connection";
 
