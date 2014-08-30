@@ -23,7 +23,6 @@ import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
-import com.codebutler.android_websockets.WebSocketClient;
 import com.crashlytics.android.Crashlytics;
 import com.squareup.otto.Bus;
 import com.tapchatapp.android.BuildConfig;
@@ -99,8 +98,6 @@ public class TapchatApp extends Application {
         }
 
         mPusherClient.start();
-
-        WebSocketClient.setTrustManagers(mTrustManagers);
     }
 
     public static void goHome(Activity activity) {
