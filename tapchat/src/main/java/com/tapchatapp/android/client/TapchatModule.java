@@ -18,6 +18,7 @@ package com.tapchatapp.android.client;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.gson.Gson;
@@ -25,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.otto.Bus;
+import com.tapchatapp.android.BuildConfig;
 import com.tapchatapp.android.app.TapchatAnalytics;
 import com.tapchatapp.android.app.TapchatApp;
 import com.tapchatapp.android.app.activity.AboutActivity;
@@ -158,6 +160,12 @@ public class TapchatModule {
             .setEndpoint("https://tapchat.herokuapp.com:443")
             .setConverter(new GsonConverter(gson, "UTF-8"))
             .setClient(new OkClient(okHttpClient))
+            .setLog(new RestAdapter.Log() {
+                    @Override public void log(String message) {
+                        Log.d("TapchatRetrofit", message);
+                    }
+        })
+            .setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
             .build();
     }
 
@@ -167,6 +175,12 @@ public class TapchatModule {
             .setConverter(new GsonConverter(gson, "UTF-8"))
             .setClient(new OkClient(okHttpClient))
             .setRequestInterceptor(requestInterceptor)
+            .setLog(new RestAdapter.Log() {
+                @Override public void log(String message) {
+                    Log.d("TapchatRetrofit", message);
+                }
+            })
+            .setLogLevel(BuildConfig.DEBUG ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE)
             .build();
     }
 

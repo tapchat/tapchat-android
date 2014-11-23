@@ -21,11 +21,11 @@
     android:versionName="3.0.0"
     android:installLocation="auto">
 
-    <permission android:name="com.tapchatapp.android.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="com.tapchatapp.android.permission.C2D_MESSAGE" />
+    <permission android:name="${applicationId}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
 
     <permission
-        android:name="com.tapchatapp.android.permission.NOTIFY"
+        android:name="${applicationId}.permission.NOTIFY"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -108,39 +108,39 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-               <category android:name="com.tapchatapp.android" />
+               <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>
 
         <receiver
             android:name=".service.MessagePushReceiver"
-            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            android:permission="${applicationId}.permission.NOTIFY">
             <intent-filter>
-                <action android:name="com.tapchatapp.android.ACTION_MESSAGE_NOTIFY" />
+                <action android:name="${applicationId}.ACTION_MESSAGE_NOTIFY" />
             </intent-filter>
         </receiver>
 
         <receiver
             android:name=".service.OpenBufferReceiver"
-            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            android:permission="${applicationId}.permission.NOTIFY">
             <intent-filter>
-                <action android:name="com.tapchatapp.android.ACTION_OPEN_BUFFER" />
+                <action android:name="${applicationId}.ACTION_OPEN_BUFFER" />
             </intent-filter>
         </receiver>
 
         <receiver
             android:name=".service.NotificationClickedReceiver"
-            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            android:permission="${applicationId}.permission.NOTIFY">
             <intent-filter>
-                <action android:name="com.tapchatapp.android.ACTION_NOTIFICATION_CLICKED" />
+                <action android:name="${applicationId}.ACTION_NOTIFICATION_CLICKED" />
             </intent-filter>
         </receiver>
 
         <receiver
             android:name=".service.ConnectionCertReceiver"
-            android:permission="com.tapchatapp.android.permission.NOTIFY">
+            android:permission="${applicationId}.permission.NOTIFY">
             <intent-filter>
-                <action android:name="com.tapchatapp.android.ACTION_INVALID_CERT" />
+                <action android:name="${applicationId}.ACTION_INVALID_CERT" />
             </intent-filter>
         </receiver>
 

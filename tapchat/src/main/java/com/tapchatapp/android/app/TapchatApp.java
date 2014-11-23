@@ -31,9 +31,9 @@ import com.tapchatapp.android.client.TapchatModule;
 import com.tapchatapp.android.network.PusherClient;
 
 import javax.inject.Inject;
-import javax.net.ssl.TrustManager;
 
 import dagger.ObjectGraph;
+import io.fabric.sdk.android.Fabric;
 
 public class TapchatApp extends Application {
 
@@ -56,13 +56,10 @@ public class TapchatApp extends Application {
 
     public static final String GCM_SENDER_ID = "263030918280";
 
-    private static final String TAG = "TapchatApp";
-
     private static TapchatApp sInstance;
 
     @Inject Bus mBus;
     @Inject PusherClient mPusherClient;
-    @Inject TrustManager[] mTrustManagers;
 
     private ObjectGraph mObjectGraph;
     private SharedPreferences mPreferences;
@@ -76,7 +73,7 @@ public class TapchatApp extends Application {
         sInstance = this;
 
         if (!BuildConfig.DEBUG) {
-            Crashlytics.start(this);
+            Fabric.with(this, new Crashlytics());
         }
 
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);

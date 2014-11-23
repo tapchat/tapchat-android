@@ -16,12 +16,11 @@
 
 buildscript {
     repositories { 
-        maven { url 'http://repo1.maven.org/maven2' }
-        maven { url 'http://download.crashlytics.com/maven' }
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/repo' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
-        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
+        classpath 'com.android.tools.build:gradle:0.14.4'
+        classpath 'io.fabric.tools:gradle:1.14.3'
     }
 }
-

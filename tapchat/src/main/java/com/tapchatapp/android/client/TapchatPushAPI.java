@@ -23,7 +23,7 @@ public interface TapchatPushAPI {
     @POST("/register") void register(@retrofit.http.Body Body body, Callback<Result> callback);
     @POST("/unregister") void unregister(@retrofit.http.Body Body body, Callback<Result> callback);
 
-    public class Body {
+    public final class Body {
         String pushId;
         String regId;
 
@@ -33,7 +33,5 @@ public interface TapchatPushAPI {
         }
     }
 
-    public class Result {
-
-    }
+    public final class Result { }
 }
