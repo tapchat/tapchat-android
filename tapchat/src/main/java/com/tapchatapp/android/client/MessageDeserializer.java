@@ -77,6 +77,7 @@ import com.tapchatapp.android.client.message.WaitingToRetryMessage;
 import com.tapchatapp.android.client.message.YouJoinedChannelMessage;
 import com.tapchatapp.android.client.message.YouNickchangeMessage;
 import com.tapchatapp.android.client.message.YouPartedChannelMessage;
+import com.tapchatapp.android.client.message.request.DeleteBufferMessage;
 import com.tapchatapp.android.client.message.request.QuitMessage;
 
 import java.lang.reflect.Type;
@@ -136,6 +137,7 @@ public class MessageDeserializer implements JsonDeserializer<Message> {
             .put(YouJoinedChannelMessage.TYPE, YouJoinedChannelMessage.class)
             .put(YouNickchangeMessage.TYPE, YouNickchangeMessage.class)
             .put(YouPartedChannelMessage.TYPE, YouPartedChannelMessage.class)
+            .put(DeleteBufferMessage.TYPE, DeleteBufferMessage.class)
             .build();
 
     private final boolean mDebug;
